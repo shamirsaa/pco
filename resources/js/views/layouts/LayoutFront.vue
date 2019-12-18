@@ -32,11 +32,31 @@
     <transition name="fade" mode="out-in">
       <router-view/>
     </transition>
-    <div class="col-12">
-<site-home/>
+    <div class="row">
+      <div class="col-sm-6">
+        <site-home/>
+      </div>
+      <div class="col-sm-6">
+        <div class="main-content home-container">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="todo-title">Productividad</h5>
+              <p class="text-sm-center">Total de casos cerrados y cumplimiento de los mismos </p>
+            </div>
+            <div class="card-body">
+              <div class="mb-4">
+                    <bar-chart
+                      :labels="['January', 'February', 'March', 'April', 'May', 'June', 'July']"
+                      :values="[65, 59, 80, 81, 56, 55, 40]"
+                    />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
     
-    <site-ranking/>
     <site-footer/>
 
   </div>
@@ -44,17 +64,25 @@
       
 </template>
 <script type="text/babel">
-import SiteRanking from '../front/Ranking.vue'
+//import SiteRanking from '../front/Ranking.vue'
 import SiteHome from '../front/Home.vue'
 import SiteFooter from './partials/TheSiteFooter.vue'
+import BarChart from '../../components/chartjs/BarChart.vue'
 
 
 export default {
   components: {
-    SiteFooter,SiteRanking, SiteHome
+    SiteFooter, SiteHome, BarChart   
   },
   mounted () {
     this.$utils.setLayout('front')
   }
 }
 </script>
+
+<style scoped>
+
+.home-container{
+  margin: 100px 5% 5% 5%;
+}
+</style>

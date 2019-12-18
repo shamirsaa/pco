@@ -9,7 +9,7 @@
           </div>
         </div>
         <div class="card-body">
-          <table class="table table-sm  table-striped ">
+          <table class="table table-sm  table-striped table-responsive">
             <thead>
               <tr>
                 <th>Posición</th>
@@ -67,7 +67,7 @@ export default {
       if(i==0){
         this.getTodos()
       }else{
-        setInterval(this.getTodos, 2000)
+        setInterval(this.getTodos, 3000)
       }
     }
     
@@ -75,9 +75,9 @@ export default {
   methods: {
 
     async getTodos () {
-    
       let response = await window.axios.get('/api/getDataSMPrueba?username='+this.textSearch)
       this.todos = response.data
+      
     }
   
   }

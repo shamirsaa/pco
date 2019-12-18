@@ -6,6 +6,7 @@ use App\integrations_service_manager;
 // use App\Point;
 use App\User;
 use Illuminate\Http\Request;
+use UsersTableSeeder;
 
 class GameController extends Controller
 {
@@ -46,11 +47,10 @@ class GameController extends Controller
         ROUND((avg(cumplimiento)*100),2) as cumplimiento, 
         max(integrations_service_manager.updated_at) as updated_at,
         ROUND((avg(productividad)*100),2) as productividad, date_format(carga,'%Y-%m-%d') as carga")
-        ->where('carga','=',date_format(now(),'Y-m-d 00:00:00'))
+        ->whereRaw("carga='".date_format(now(),'Y-m-d 00:00:00')."' and name like "."'%".$request->get('username')."%'")
         ->join('users', 'users.username', '=', 'integrations_service_manager.cerrado_por')
         ->orderBy('carga','desc')
         ->orderBy('cerrados','desc')
-        ->username($request->get('username'))
         ->groupBy('name', 'carga')
         ->get()
         ;
@@ -69,4 +69,12 @@ class GameController extends Controller
  
     }
     
+
+    public static function getUser(Request $request)
+    {
+        $user = User::where('username','=',$request->get('username'))->get();
+        return $user;
+ 
+    }
+
 }

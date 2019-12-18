@@ -8,6 +8,7 @@ export default {
       Ls.set('auth.token', response.data.token)
       toastr['success']('Logged In!', 'Success')
       return response.data.token
+      
     } catch (error) {
       if (error.response.status === 401) {
         toastr['error']('Invalid Credentials', 'Error')

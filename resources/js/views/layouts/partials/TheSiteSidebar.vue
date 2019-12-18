@@ -22,6 +22,21 @@
             </router-link>
           </v-collapse-item>
 
+          <v-collapse-item active-url="/admin/users">
+            <a slot="item-title" href="#">
+              <i class="icon-fa icon-fa-user"/>Users
+              <span class="icon-fa arrow icon-fa-fw"/>
+            </a>
+
+            <router-link to="/admin/users/profile">
+              Profile
+            </router-link>
+
+            <router-link to="/admin/users/all">
+              All Users
+            </router-link>
+          </v-collapse-item>
+          
           <v-collapse-item active-url="/admin/layouts">
             <a slot="item-title" href="#">
               <i class="icon-fa icon-fa-th-large"/>Layouts
@@ -224,20 +239,6 @@
             </router-link>
           </v-collapse-item>
 
-          <v-collapse-item active-url="/admin/users">
-            <a slot="item-title" href="#">
-              <i class="icon-fa icon-fa-user"/>Users
-              <span class="icon-fa arrow icon-fa-fw"/>
-            </a>
-
-            <router-link to="/admin/users/profile">
-              Profile
-            </router-link>
-
-            <router-link to="/admin/users/all">
-              All Users
-            </router-link>
-          </v-collapse-item>
 
           <v-collapse-item active-url="/admin/apps">
             <a slot="item-title" href="#">

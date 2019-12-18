@@ -40,6 +40,7 @@ class Kernel extends ConsoleKernel
             ")
             ->where('estado','=','Cerrado')
             ->whereBetween('FECHA_CIERRE', [date('Y-m-d 00:00:00'), date('Y-m-d 23:59:59')])
+            //->whereBetween('FECHA_CIERRE', ['2019-12-01 00:00:00', '2019-12-01 23:59:59'])
             ->groupBy('CERRADO_POR')
             ->get();
     
@@ -61,7 +62,7 @@ class Kernel extends ConsoleKernel
             }
         })->everyMinute();
 
-        //-------- calculo de productibidad ----//
+        //-------- calculo de productividad ----//
 
         $schedule->call(function () {
             $results = integrations_service_manager::selectRaw("cerrado_por as username, carga

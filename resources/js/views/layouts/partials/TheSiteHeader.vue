@@ -26,7 +26,7 @@
       </div>
     </a>
     <ul class="action-list">
-      <li>
+      <!-- <li>
         <v-dropdown :show-arrow="false">
           <a slot="activator" href="#">
             <i class="icon-fa icon-fa-plus"/>
@@ -48,8 +48,8 @@
             </a>
           </v-dropdown-item>
         </v-dropdown>
-      </li>
-      <li>
+      </li> -->
+      <!-- <li>
         <v-dropdown :show-arrow="false">
           <a
             slot="activator"
@@ -76,7 +76,7 @@
             </v-dropdown-item>
           </div>
         </v-dropdown>
-      </li>
+      </li> -->
       <li>
         <v-dropdown :show-arrow="false">
           <a
@@ -89,6 +89,13 @@
           >
             <img src="/assets/img/avatars/avatar.png" alt="Avatar">
           </a>
+          <!-- Perfil -->
+           <v-dropdown-item>
+            <router-link class="dropdown-item" to="/admin/users/profile">
+              <i class="icon-fa icon-fa-cogs"/> Perfil
+            </router-link>
+          </v-dropdown-item>
+          <!-- Settings -->
           <v-dropdown-item>
             <router-link class="dropdown-item" to="/admin/settings">
               <i class="icon-fa icon-fa-cogs"/> Settings

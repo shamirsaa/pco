@@ -1,7 +1,7 @@
 <template>
   <div class="main-content page-profile">
     <div class="page-header">
-      <h3 class="page-title">User Profile</h3>
+      <h3 class="page-title">Perfil de </h3>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Home</a></li>
         <li class="breadcrumb-item"><a href="#">Users</a></li>
@@ -224,6 +224,31 @@ export default {
   components: {
     'tabs': Tabs,
     'tab': Tab
+  },
+   data () {
+    return {
+      
+      users: [
+        {
+          title: 'Install the Template',
+          completed: false,
+         
+        }
+      ]
+    }
+  },
+  
+  mounted () {  
+    this.getTodos() 
+  },
+  methods: {
+
+    async getTodos () {
+      let response = await window.axios.get('api/game/getUser?username='+this.textSearch)
+      this.todos = response.data
+      
+    }
+  
   }
 }
 </script>

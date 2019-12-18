@@ -44,27 +44,23 @@ Route::group(['prefix' => 'admin', 'middleware' => 'api.auth'], function (){
 
     Route::group(['prefix' => 'users'], function (){
 
-        Route::get('/get',[
-            'as' => 'admin.users', 'uses' => 'Demo\PagesController@allUsers'
-        ]);
+        Route::get('/get',['as' => 'admin.users', 'uses' => 'Demo\PagesController@allUsers']);
 
        
-
-        Route::delete('/{id}',[
-            'as' => 'admin.users.delete', 'uses' => 'Demo\PagesController@destroy'
-        ]);
+        Route::delete('/{id}',['as' => 'admin.users.delete', 'uses' => 'Demo\PagesController@destroy']);
 
     });
 
 });
 
-//api gamne
+//api game
 Route::get('/getRanking','GameController@getRanking');
 Route::get('/getDataSMPrueba','GameController@getDataSMPrueba');
 
 Route::group(['prefix' => 'game'], function (){
 
-    Route::get('/getDataSM',['as' => 'game', 'uses' => 'GameController@getDataSM']);
+    Route::get('/getDataSM',['as' => 'getDataSM', 'uses' => 'GameController@getDataSM']);
+    Route::get('/getUser',['as' => 'getUser', 'uses' => 'GameController@getUser']);
 
 
 });

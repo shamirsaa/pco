@@ -47,7 +47,7 @@ export default {
     }
 
     this.myBarChart = new Chart(context, {
-      type: 'bar',
+      type: 'horizontalBar',
       data: data,
       options: options
     })
@@ -62,5 +62,9 @@ export default {
 <style scoped>
 .graph-container {
   height: 300px;
+}
+
+.home-container{
+  margin: 150px 5% 5% 5%;
 }
 </style>

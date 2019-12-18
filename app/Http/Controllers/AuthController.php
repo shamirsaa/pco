@@ -11,6 +11,7 @@ class AuthController extends Controller
     {
         // grab credentials from the request
         $credentials = $request->only('email', 'password');
+        $user = session(['email' =>  $request->only('email')]);
         try {
             // attempt to verify the credentials and create a token for the user
             if (! $token = JWTAuth::attempt($credentials)) {
@@ -22,6 +23,7 @@ class AuthController extends Controller
         }
 
         // all good so return the token
+
         return response()->json(compact('token'));
     }
 
