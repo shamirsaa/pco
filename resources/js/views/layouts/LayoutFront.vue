@@ -2,26 +2,19 @@
   <div class="template-container">
     <header class="site-header">
       <a href="#" class="brand-main">
-        <!-- <img
+        <img
           id="logo-desk"
-          src="/assets/img/logo-desk.png"
+          src="/assets/img/logo.png"
           alt="PCO Logo"
           class="d-none d-md-inline"
-        > -->
-        <p
-          id="logo-desk"
-          class="d-none d-md-inline"
-        >Portal de Cifras Operativas</p>
-        <p
+        >
+        <p id="logo-desk" class="d-none d-md-inline">Portal de Cifras Operativas</p>
+        <img
           id="logo-mobile"
-          c class="d-md-none"
-        >PCO</p>
-        <!-- <img
-          id="logo-mobile"
-          src="/assets/img/logo-mobile.png"
+          src="/assets/img/logo.png"
           alt="PCO Logo"
           class="d-md-none"
-        > -->
+        >
       </a>
       <ul class="action-list">
         <li class="action-item">

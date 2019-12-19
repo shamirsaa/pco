@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\integrations_service_manager;
 // use App\Point;
 use App\User;
+use DB;
 use Illuminate\Http\Request;
 use UsersTableSeeder;
 
@@ -42,29 +43,37 @@ class GameController extends Controller
 
     public static function getDataSMPrueba(Request $request)
     {
-        $sm = integrations_service_manager::selectRaw("name as username, 
-        sum(cerrados) as cerrados, 
-        ROUND((avg(cumplimiento)*100),2) as cumplimiento, 
-        max(integrations_service_manager.updated_at) as updated_at,
-        ROUND((avg(productividad)*100),2) as productividad, date_format(carga,'%Y-%m-%d') as carga")
-        ->whereRaw("carga='".date_format(now(),'Y-m-d 00:00:00')."' and name like "."'%".$request->get('username')."%'")
-        ->join('users', 'users.username', '=', 'integrations_service_manager.cerrado_por')
-        ->orderBy('carga','desc')
-        ->orderBy('cerrados','desc')
-        ->groupBy('name', 'carga')
-        ->get()
-        ;
-        // $sm = integrations_service_manager::selectRaw('cerrado_por as username, 
+        // $sm = integrations_service_manager::selectRaw("users.name as username, 
         // sum(cerrados) as cerrados, 
         // ROUND((avg(cumplimiento)*100),2) as cumplimiento, 
         // max(integrations_service_manager.updated_at) as updated_at,
-        // ROUND((avg(productibidad)*100),2) as productibidad')
-        // //->where('carga','=',date_format(now(),'Y-m-d 00:00:00'))
-        // //->join('users', 'users.username', '=', 'integrations_service_manager.cerrado_por')
+        // ROUND((avg(productividad)*100),2) as productividad, date_format(carga,'%Y-%m-%d') as carga")
+        // ->whereRaw("carga='".date_format(now(),'Y-m-d 00:00:00')."' and users.name like "."'%".$request->get('username')."%' and goals.life >= now()")
+        // ->join('users', 'users.username', '=', 'integrations_service_manager.cerrado_por')
+        // ->join('goals', 'goals.name', '=', 'productividad')
+        // ->orderBy('carga','desc')
         // ->orderBy('cerrados','desc')
-        // ->groupBy('cerrado_por')
+        // ->groupBy('users.name', 'carga')
         // ->get()
         // ;
+        $sm = DB::select("
+            select 
+            users.name as username, 
+            goals.goal,
+            sum(cerrados) as cerrados, 
+            ROUND((avg(cumplimiento)*100),2) as cumplimiento, 
+            max(integrations_service_manager.updated_at) as updated_at, 
+            ROUND((avg(productividad)*100),2) as productividad, 
+            date_format(carga,'%Y-%m-%d') as carga 
+            from `integrations_service_manager` 
+            inner join `users` on `users`.`username` = `integrations_service_manager`.`cerrado_por` 
+            inner join `goals` on `goals`.`name` = 'productividad' 
+            where carga='".date_format(now(),'Y-m-d 00:00:00')."'
+            and users.name like "."'%".$request->get('username')."%' 
+            and goals.life >= now() 
+            group by users.name, `carga`, goals.goal 
+            order by `carga` desc, `cerrados` desc
+        ");
         return $sm;
  
     }
