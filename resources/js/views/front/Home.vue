@@ -37,6 +37,7 @@
                   <th>Cerrados</th>
                   <th>Cumplimiento</th>
                   <th>Productividad</th>
+                  <th>Fecha</th>
                 </tr>
             </tfoot>
           </table>

@@ -8,6 +8,12 @@
 import Chart from 'chart.js'
 
 export default {
+   data () {
+    return {
+      
+       datachart: '',
+    }
+  },
   props: {
     labels: {
       type: Array,
@@ -22,6 +28,18 @@ export default {
   },
 
   mounted () {
+for(var i=0; i<=1; i++){
+      if(i==0){
+        this.getTodos()
+      }else{
+        setInterval(this.getTodos, 30000)
+      }
+    }
+  },
+  methods: {
+
+    async getTodos () {
+
     let context = this.$refs.graph.getContext('2d')
     let options = {
       responsive: true,
@@ -31,31 +49,43 @@ export default {
       }
     }
 
-    let data = {
-      labels: this.labels,
-      datasets: [
-        {
-          label: 'My First dataset',
-          backgroundColor: 'rgba(79, 196, 127,0.2)',
-          borderColor: 'rgba(79, 196, 127,1)',
-          borderWidth: 1,
-          hoverBackgroundColor: 'rgba(79, 196, 127,0.4)',
-          hoverBorderColor: 'rgba(79, 196, 127,1)',
-          data: this.values
+    let response =   await window.axios.get('/api/getDataSMPrueba?username=')
+      
+        // JSON responses are automatically parsed.
+        const responseData = response.data
+        let datachart = this.chartData = {
+          labels: responseData.map(item => item.username),
+          datasets: [
+            {
+              label: '% Productividad',
+              backgroundColor: '#f87979',
+              data: responseData.map(item => item.productividad)
+            },
+            {
+              label: 'Cerrados',
+              backgroundColor: '#000000',
+              data: responseData.map(item => item.cerrados),
+              type: 'line'
+            },
+            
+          ]
         }
-      ]
-    }
-
+      
     this.myBarChart = new Chart(context, {
-      type: 'horizontalBar',
-      data: data,
+      type: 'bar',
+      data: datachart,
       options: options
     })
-  },
+    
+    },
 
-  beforeDestroy () {
-    this.myBarChart.destroy()
+    beforeDestroy () {
+      this.myBarChart.destroy()
+    }
+  
   }
+
+  
 }
 </script>
 
