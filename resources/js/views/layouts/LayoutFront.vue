@@ -4,11 +4,11 @@
       <a href="#" class="brand-main">
         <img
           id="logo-desk"
-          src="/assets/img/logo.png"
+          src="/assets/img/logo_white.png"
           alt="PCO Logo"
           class="d-none d-md-inline"
         >
-        <p id="logo-desk" class="d-none d-md-inline">Portal de Cifras Operativas</p>
+        <!-- <p id="logo-desk" class="d-none d-md-inline">Portal de Cifras Operativas</p> -->
         <img
           id="logo-mobile"
           src="/assets/img/logo.png"

@@ -65,3 +65,6 @@ Route::group(['prefix' => 'game'], function (){
 
 });
 
+//api mail
+
+Route::post('/sendEmail','sendController@sendEmail');
