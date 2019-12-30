@@ -78,12 +78,57 @@ class GameController extends Controller
  
     }
     
+    
 
     public static function getUser(Request $request)
     {
         $user = User::where('username','=',$request->get('username'))->get();
         return $user;
  
+    }
+
+    public static function getDataSMChart(Request $request)
+    {
+        
+        switch ($request->get('date')){
+            case '':
+                $date = 'carga ="'.date_format(now(),'Y-m-d 00:00:00').'"';
+            break;
+
+            case 'today':
+                $date = 'carga ="'.date_format(now(),'Y-m-d 00:00:00').'"';
+            break;
+           
+            case 'month':
+                $date = "carga between '".gmdate('Y-m-d 00:00:00', strtotime('first day of this month'))."' and '".gmdate('Y-m-d 00:00:00', strtotime('last day of this month'))."'";
+            break;
+
+            case 'week':
+                $date = "carga between '".date('Y-m-d 00:00:00', strtotime('Monday this week'.now()))."' and '".date('Y-m-d 00:00:00', strtotime('Sunday this week'.now()))."'";
+            break;
+
+            case 'quarter':
+                $date = "carga between '".date('Y-m-d 00:00:00', strtotime('first day of -2 month'.now()))."' and '".date('Y-m-d 00:00:00', strtotime('last day of this month'.now()))."'";
+            break;
+        }
+        $sm = DB::select("
+            select 
+            users.name as username, 
+            goals.goal,
+            sum(cerrados) as cerrados, 
+            ROUND((avg(cumplimiento)*100),2) as cumplimiento, 
+            max(integrations_service_manager.updated_at) as updated_at, 
+            ROUND((avg(productividad)*100),2) as productividad
+            from `integrations_service_manager` 
+            inner join `users` on `users`.`username` = `integrations_service_manager`.`cerrado_por` 
+            inner join `goals` on `goals`.`name` = 'productividad' 
+            where ".$date."
+            and users.name like "."'%".$request->get('username')."%' 
+            and goals.life >= now() 
+            group by users.name,  goals.goal 
+            order by  productividad desc
+        ");
+        return $sm;
     }
 
 }

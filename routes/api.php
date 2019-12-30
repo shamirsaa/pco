@@ -56,6 +56,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'api.auth'], function (){
 //api game
 Route::get('/getRanking','GameController@getRanking');
 Route::get('/getDataSMPrueba','GameController@getDataSMPrueba');
+Route::get('/getDataSMChart','GameController@getDataSMChart');
 
 Route::group(['prefix' => 'game'], function (){
 
