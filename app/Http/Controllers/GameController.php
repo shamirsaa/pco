@@ -33,8 +33,9 @@ class GameController extends Controller
         //->where('carga','=',date_format(now(),'Y-m-d 00:00:00'))
         ->orderBy('cerrados','desc')
         ->groupBy('cerrado_por')
-        //->get()
+        ->Username($request->get('filter'))
         ->paginate($page)
+         //->get()
         ;
         return $sm;
         //return response()->json($sm);

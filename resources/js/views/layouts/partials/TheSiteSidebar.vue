@@ -237,7 +237,7 @@
             <router-link to="/admin/pages/register-3">
               Register 3
             </router-link>
-          </v-collapse-item>
+          </v-collapse-item> 
 
 
           <v-collapse-item active-url="/admin/apps">
@@ -263,6 +263,7 @@
               <i class="icon-fa icon-fa-cogs"/>Settings
             </router-link>
           </v-collapse-item>
+          
         </v-collapse>
       </div>
     </div>

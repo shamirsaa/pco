@@ -1,5 +1,5 @@
 <template>
-  <div class="main-content vue-tabs-demo">
+  <!-- <div class="main-content vue-tabs-demo"> -->
     <tabs class="tabs-simple">
       <tab id="simple-today" name="Hoy">
 
@@ -30,7 +30,7 @@
         </p>
       </tab>
     </tabs>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>

@@ -64,8 +64,10 @@ export default {
   data () {
     return {
       loginData: {
-        email: 'admin@laraspace.in',
-        password: 'admin@123',
+        // email: 'admin@laraspace.in',
+        // password: 'admin@123',
+        email: '',
+        password: '',
         remember: ''
       }
     }

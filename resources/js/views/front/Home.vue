@@ -1,9 +1,9 @@
 <template>
-  <div class="main-content home-container">
+  <!-- <div class="main-content home-container"> -->
       <div class="card">
         <div class="card-header">
-          <h5 class="todo-title">Productividad</h5>
-          <p class="text-sm-center">Total de casos cerrados y cumplimiento de los mismos </p>
+          <h5 class="todo-title">Productividad por Día</h5>
+          <p class="text-sm-center">Total de casos cerrados, % productividad y % cumplimiento SLA</p>
           <div>
             <input id="input-search" type="text" class="form-control" v-model="textSearch" @input="onChangeText" @change="onChangeText" placeholder='Buscar...' value="">
           </div>
@@ -44,7 +44,7 @@
         </div>
         
       </div>
-    </div>
+    <!-- </div> -->
 </template>
 
 <script>

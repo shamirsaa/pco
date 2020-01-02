@@ -85,7 +85,7 @@ export default {
   methods: {
     async fetchData ({ page, filter, sort }) {
 
-       const response = await axios.get(`/api/game/getDataSM?page=${page}`)
+       const response = await axios.get(`/api/game/getDataSM?page=${page}&filter=${filter}&sort=${sort}`)
       
       return {
         data: response.data.data,
