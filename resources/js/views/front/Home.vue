@@ -5,7 +5,7 @@
           <h5 class="todo-title">Productividad</h5>
           <p class="text-sm-center">Total de casos cerrados y cumplimiento de los mismos </p>
           <div>
-            <input id="input-search" type="text" class="form-control" v-model="textSearch" placeholder='Buscar...' value="">
+            <input id="input-search" type="text" class="form-control" v-model="textSearch" @input="onChangeText" @change="onChangeText" placeholder='Buscar...' value="">
           </div>
         </div>
         <div class="card-body">
@@ -60,6 +60,7 @@ export default {
         }
       ],
        textSearch: '',
+       events: []
     }
   },
   
@@ -68,7 +69,7 @@ export default {
       if(i==0){
         this.getTodos()
       }else{
-        setInterval(this.getTodos, 3000)
+        setInterval(this.getTodos, 30000)
       }
     }
     
@@ -79,6 +80,9 @@ export default {
       let response = await window.axios.get('/api/getDataSMPrueba?username='+this.textSearch)
       this.todos = response.data
       
+    },
+     onChangeText ({ type, target }) {
+      this.getTodos()
     }
   
   }

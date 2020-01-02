@@ -89,28 +89,53 @@ class GameController extends Controller
 
     public static function getDataSMChart(Request $request)
     {
-        
-        switch ($request->get('date')){
-            case '':
-                $date = 'carga ="'.date_format(now(),'Y-m-d 00:00:00').'"';
-            break;
+        if($request->get('d')=='last'){
 
-            case 'today':
-                $date = 'carga ="'.date_format(now(),'Y-m-d 00:00:00').'"';
-            break;
-           
-            case 'month':
-                $date = "carga between '".gmdate('Y-m-d 00:00:00', strtotime('first day of this month'))."' and '".gmdate('Y-m-d 00:00:00', strtotime('last day of this month'))."'";
-            break;
-
-            case 'week':
-                $date = "carga between '".date('Y-m-d 00:00:00', strtotime('Monday this week'.now()))."' and '".date('Y-m-d 00:00:00', strtotime('Sunday this week'.now()))."'";
-            break;
-
-            case 'quarter':
-                $date = "carga between '".date('Y-m-d 00:00:00', strtotime('first day of -2 month'.now()))."' and '".date('Y-m-d 00:00:00', strtotime('last day of this month'.now()))."'";
-            break;
+            switch ($request->get('date')){
+                case '':
+                    $date = 'carga ="'.date_format(now(),'Y-m-d 00:00:00').'"';
+                break;
+    
+                case 'today':
+                    $date = 'carga ="'.date_format(now(),'Y-m-d 00:00:00').'"';
+                break;
+               
+                case 'month':
+                     $date = "carga between '".gmdate('Y-m-d 00:00:00', strtotime('first day of -1 month'))."' and '".gmdate('Y-m-d 00:00:00', strtotime('last day of -1 month'))."'";
+                break;
+    
+                case 'week':
+                    $date = "carga between '".date('Y-m-d 00:00:00', strtotime("Monday last week".now()))."' and '".date('Y-m-d 00:00:00', strtotime("Sunday last week".now()))."'";
+                break;
+    
+                case 'quarter':
+                    $date = "carga between '".date('Y-m-d 00:00:00', strtotime('first day of last -2 month'.now()))."' and '".date('Y-m-d 00:00:00', strtotime('last day of last month'.now()))."'";
+                break;
+            }
+        }else{
+            switch ($request->get('date')){
+                case '':
+                    $date = 'carga ="'.date_format(now(),'Y-m-d 00:00:00').'"';
+                break;
+    
+                case 'today':
+                    $date = 'carga ="'.date_format(now(),'Y-m-d 00:00:00').'"';
+                break;
+               
+                case 'month':
+                    $date = "carga between '".gmdate('Y-m-d 00:00:00', strtotime('first day of this month'))."' and '".gmdate('Y-m-d 00:00:00', strtotime('last day of this month'))."'";
+                break;
+    
+                case 'week':
+                    $date = "carga between '".date('Y-m-d 00:00:00', strtotime("Monday this week".now()))."' and '".date('Y-m-d 00:00:00', strtotime("Sunday this week".now()))."'";
+                break;
+    
+                case 'quarter':
+                    $date = "carga between '".date('Y-m-d 00:00:00', strtotime('first day of -2 month'.now()))."' and '".date('Y-m-d 00:00:00', strtotime('last day of this month'.now()))."'";
+                break;
+            }
         }
+        
         $sm = DB::select("
             select 
             users.name as username, 

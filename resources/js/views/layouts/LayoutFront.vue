@@ -38,10 +38,7 @@
             </div>
             <div class="card-body">
               <div class="mb-4">
-                    <bar-chart
-                      :labels="['January', 'February', 'March', 'April', 'May', 'June', 'July']"
-                      :values="[65, 59, 80, 81, 56, 55, 40, 20]"
-                    />
+                    <bar-chart/>
               </div>
             </div>
           </div>
